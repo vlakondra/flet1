@@ -1,13 +1,12 @@
-import flet as ft
 
 def parse_questions(file_path: str) -> list[dict[str, list[str]]]:
-    questions = []
+    questions:list[dict] = []
     with open(file_path, 'r', encoding='utf-8') as file:
-        lines = file.readlines()
+        lines:list[str] = file.readlines()
 
     current_question = None
     for line in lines:
-        line = line.strip()
+        line:str = line.strip()
         if line:  # Если строка не пустая
             if not current_question:
                 # Начинается новый вопрос

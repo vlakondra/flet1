@@ -1,19 +1,39 @@
 import flet as ft
 
-def ff():
-    '''test'''
+def handle_on_hover(e):
+    print(f"{e.control.content.value}.on_hover")
 
-    return 333
+def handle_color_click(e):
+    print(f"{e.control.content.value}.on_click")
 
-
-
-def example():
-
-    container_1 = ft.Container(
-        content=ft.Text("Center"),
-        alignment=ft.alignment.center,
-        bgcolor=ft.Colors.BLUE_GREY_100,
-        width=150,
-        height=150,
+menubar = ft.MenuBar(
+        expand=True,
+        controls=[
+            ft.SubmenuButton(
+                content=ft.Text("Файл"),
+                controls=[
+                    ft.MenuItemButton(
+                        content=ft.Text("Открыть тест"),
+                        leading=ft.Icon(ft.Icons.FILE_DOWNLOAD),
+                        style=ft.ButtonStyle(bgcolor={ft.ControlState.PRESSED: ft.Colors.BLUE_200}),
+                        on_click=handle_color_click,
+                        on_hover=handle_on_hover,
+                    ),
+                    ft.MenuItemButton(
+                        content=ft.Text("Green"),
+                        leading=ft.Icon(ft.Icons.COLORIZE),
+                        style=ft.ButtonStyle(bgcolor={ft.ControlState.HOVERED: ft.Colors.GREEN}),
+                        #on_click=handle_color_click,
+                        on_hover=handle_on_hover,
+                    ),
+                    ft.MenuItemButton(
+                        content=ft.Text("Red"),
+                        leading=ft.Icon(ft.Icons.COLORIZE),
+                        style=ft.ButtonStyle(bgcolor={ft.ControlState.HOVERED: ft.Colors.RED}),
+                        #on_click=handle_color_click,
+                        on_hover=handle_on_hover,
+                    )
+                ]
+            ),
+        ]
     )
-    return container_1
