@@ -1,13 +1,36 @@
 import flet as ft
 
 from utils import parse_questions
-from conts import menubar #,handle_color_click
+from topmenu import menubar 
 
 def main(page: ft.Page):
     #Добавим главное меню
-    page.add(
-        ft.Row([menubar],rotate=0)
-        )
+    page.add( ft.Row([menubar],rotate=0))
+
+    #функции обработки выхода
+    def handle_window_event(e):
+        if e.data == "close" :
+            page.open(confirm_dialog)
+
+    page.window.prevent_close = True
+    page.window.on_event = handle_window_event
+
+    def yes_click(e):
+        page.window.destroy()
+
+    def no_click(e):
+        page.close(confirm_dialog)
+
+    confirm_dialog = ft.AlertDialog(
+        modal=True,
+        title=ft.Text("Подтверждение"),
+        content=ft.Text("Вы действительно хотите выйти?"),
+        actions=[
+            ft.ElevatedButton("Да", on_click=yes_click),
+            ft.OutlinedButton("Нет", on_click=no_click),
+        ],
+        actions_alignment=ft.MainAxisAlignment.END,
+    )
 
     #Определим функцию для обработки результата выбора файла
     def on_dialog_result(e: ft.FilePickerResultEvent):
@@ -17,9 +40,9 @@ def main(page: ft.Page):
             print(quests) 
             return quests 
 
-    #Добавим FilePicker c обработчиком события выбора
+    #Создадим FilePicker c обработчиком события выбора
     file_picker = ft.FilePicker(on_result = on_dialog_result)
-    
+    # и добавим его на страницу
     page.overlay.append(file_picker)
     page.update()
 
@@ -28,10 +51,11 @@ def main(page: ft.Page):
     page.add(ft.ElevatedButton("Открыть тест...",
     on_click=lambda _: file_picker.pick_files(file_type=file_type,  dialog_title='File', allowed_extensions=['txt'],  allow_multiple=False)))
 
+    mbc:ft.Control= menubar.controls[0]
+    sm = mbc.controls[0] #Ссылка на меню "открыть тест"
+    ex:ft.MenuItemButton = mbc.controls[2] #Ссылка на меню "выход"
 
-    mbc = menubar.controls[0]
-    sm = mbc.controls[0]
     sm.on_click = lambda _: file_picker.pick_files(file_type=file_type,  dialog_title='File', allowed_extensions=['txt'],  allow_multiple=False)#handle_color_click1
-
+    ex.event_handlers['click'] = lambda _:  page.open(confirm_dialog)
 
 ft.app(main)
