@@ -1,6 +1,6 @@
 
 import flet as ft
-from controls.containers import red_container, blue_container,green_container
+# from controls.containers import red_container, blue_container,green_container
 
 def main(page: ft.Page):
     page.appbar = ft.AppBar(
@@ -9,42 +9,42 @@ def main(page: ft.Page):
         bgcolor=ft.Colors.BLUE,
     )
     
-    # # Создаем три контейнера с разными цветами
-    # red_container = ft.Container(
-    #     bgcolor=ft.colors.RED,
-    #     expand=True,
-    #         content=ft.Row(
-    #         [
-    #             ft.ElevatedButton(text="Кнопка 1", expand=1),
-    #             ft.ElevatedButton(text="Кнопка 2", expand=1),
-    #             ft.ElevatedButton(text="Кнопка 3", expand=1),
-    #         ]
-    #     )
-    # )
+    # Создаем три контейнера с разными цветами
+    red_container = ft.Container(
+        bgcolor=ft.colors.RED,
+        expand=True,
+            content=ft.Row(
+            [
+                ft.ElevatedButton(text="Кнопка 1", expand=1),
+                ft.ElevatedButton(text="Кнопка 2", expand=1),
+                ft.ElevatedButton(text="Кнопка 3", expand=1),
+            ]
+        )
+    )
     
-    # green_container = blue_container = ft.Container(
-    #     bgcolor=ft.colors.GREEN,
-    #     expand=True,
-    #         content=ft.Row(
-    #         [
-    #             ft.ElevatedButton(text="Кнопка 1", expand=1),
-    #             ft.ElevatedButton(text="Кнопка 2", expand=1),
-    #             ft.ElevatedButton(text="Кнопка 3", expand=1),
-    #         ]
-    #     )
-    # )
+    green_container = blue_container = ft.Container(
+        bgcolor=ft.colors.GREEN,
+        expand=True,
+            content=ft.Row(
+            [
+                ft.ElevatedButton(text="Кнопка 1", expand=1),
+                ft.ElevatedButton(text="Кнопка 2", expand=1),
+                ft.ElevatedButton(text="Кнопка 3", expand=1),
+            ]
+        )
+    )
     
-    # blue_container = ft.Container(
-    #     bgcolor=ft.colors.BLUE,
-    #     expand=True,
-    #         content=ft.Row(
-    #         [
-    #             ft.ElevatedButton(text="Кнопка 1", expand=1),
-    #             ft.ElevatedButton(text="Кнопка 2", expand=1),
-    #             ft.ElevatedButton(text="Кнопка 3", expand=1),
-    #         ]
-    #     )
-    # )
+    blue_container = ft.Container(
+        bgcolor=ft.colors.BLUE,
+        expand=True,
+            content=ft.Row(
+            [
+                ft.ElevatedButton(text="Кнопка 1", expand=1),
+                ft.ElevatedButton(text="Кнопка 2", expand=1),
+                ft.ElevatedButton(text="Кнопка 3", expand=1),
+            ]
+        )
+    )
     
     # Словарь для хранения контейнеров
     containers = {
