@@ -34,9 +34,16 @@ menubar = ft.MenuBar(
                         leading=ft.Icon(ft.Icons.EXIT_TO_APP),
                         style=ft.ButtonStyle(bgcolor={ft.ControlState.HOVERED: ft.Colors.RED}),
                         on_click=handle_exit_click,
+                        on_hover=handle_on_hover,)
+                ])
+            ,ft.SubmenuButton(content=ft.Text('Правка')
+                              ,controls=[
+                                     ft.MenuItemButton(
+                        content=ft.Text("Открыть тест"),
+                        leading=ft.Icon(ft.Icons.FILE_DOWNLOAD),
+                        style=ft.ButtonStyle(bgcolor={ft.ControlState.PRESSED: ft.Colors.BLUE_200}),
+                        on_click=handle_file_click,
                         on_hover=handle_on_hover,
-                    )
-                ]
-            ),
-        ]
-    )
+                    ),])
+    ]
+)

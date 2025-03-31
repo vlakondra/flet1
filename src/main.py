@@ -1,61 +1,78 @@
-import flet as ft
 
-from utils import parse_questions
-from topmenu import menubar 
+import flet as ft
+from controls.containers import red_container, blue_container,green_container
 
 def main(page: ft.Page):
-    #Добавим главное меню
-    page.add( ft.Row([menubar],rotate=0))
-
-    #функции обработки выхода
-    def handle_window_event(e):
-        if e.data == "close" :
-            page.open(confirm_dialog)
-
-    page.window.prevent_close = True
-    page.window.on_event = handle_window_event
-
-    def yes_click(e):
-        page.window.destroy()
-
-    def no_click(e):
-        page.close(confirm_dialog)
-
-    confirm_dialog = ft.AlertDialog(
-        modal=True,
-        title=ft.Text("Подтверждение"),
-        content=ft.Text("Вы действительно хотите выйти?"),
-        actions=[
-            ft.ElevatedButton("Да", on_click=yes_click),
-            ft.OutlinedButton("Нет", on_click=no_click),
-        ],
-        actions_alignment=ft.MainAxisAlignment.END,
+    page.appbar = ft.AppBar(
+        title=ft.Text("Проект"),
+        center_title=True,
+        bgcolor=ft.Colors.BLUE,
     )
+    
+    # # Создаем три контейнера с разными цветами
+    # red_container = ft.Container(
+    #     bgcolor=ft.colors.RED,
+    #     expand=True,
+    #         content=ft.Row(
+    #         [
+    #             ft.ElevatedButton(text="Кнопка 1", expand=1),
+    #             ft.ElevatedButton(text="Кнопка 2", expand=1),
+    #             ft.ElevatedButton(text="Кнопка 3", expand=1),
+    #         ]
+    #     )
+    # )
+    
+    # green_container = blue_container = ft.Container(
+    #     bgcolor=ft.colors.GREEN,
+    #     expand=True,
+    #         content=ft.Row(
+    #         [
+    #             ft.ElevatedButton(text="Кнопка 1", expand=1),
+    #             ft.ElevatedButton(text="Кнопка 2", expand=1),
+    #             ft.ElevatedButton(text="Кнопка 3", expand=1),
+    #         ]
+    #     )
+    # )
+    
+    # blue_container = ft.Container(
+    #     bgcolor=ft.colors.BLUE,
+    #     expand=True,
+    #         content=ft.Row(
+    #         [
+    #             ft.ElevatedButton(text="Кнопка 1", expand=1),
+    #             ft.ElevatedButton(text="Кнопка 2", expand=1),
+    #             ft.ElevatedButton(text="Кнопка 3", expand=1),
+    #         ]
+    #     )
+    # )
+    
+    # Словарь для хранения контейнеров
+    containers = {
+        "Красный": red_container,
+        "Зеленый": green_container,
+        "Синий": blue_container
+    }
+    
+    # Функция для обновления отображаемого контейнера
+    def update_container(e):
+        selected_color = e.control.value
+        page.controls[1] = containers[selected_color]  # Обновляем второй элемент управления
+        page.update()  # Обновляем страницу
 
-    #Определим функцию для обработки результата выбора файла
-    def on_dialog_result(e: ft.FilePickerResultEvent):
-        if e.files:
-            #разберем файл с вопросами
-            quests = parse_questions(e.files[0].path)    
-            print(quests) 
-            return quests 
+    # Создаем выпадающее меню для выбора цвета
+    color_dropdown = ft.Dropdown(
+        width=300,
+        options=[
+            ft.dropdown.Option("Красный"),
+            ft.dropdown.Option("Зеленый"),
+            ft.dropdown.Option("Синий"),
+        ],
+        on_change=update_container,
+        label="Выберите контейнер"
+    )
+    
+    # Добавляем элементы на страницу
+    page.add(color_dropdown, red_container)  # Изначально показываем красный контейнер
 
-    #Создадим FilePicker c обработчиком события выбора
-    file_picker = ft.FilePicker(on_result = on_dialog_result)
-    # и добавим его на страницу
-    page.overlay.append(file_picker)
-    page.update()
-
-    #Добавим кнопку  вызова file_picker
-    file_type = ft.FilePickerFileType.CUSTOM
-    page.add(ft.ElevatedButton("Открыть тест...",
-    on_click=lambda _: file_picker.pick_files(file_type=file_type,  dialog_title='File', allowed_extensions=['txt'],  allow_multiple=False)))
-
-    mbc:ft.Control= menubar.controls[0]
-    sm = mbc.controls[0] #Ссылка на меню "открыть тест"
-    ex:ft.MenuItemButton = mbc.controls[2] #Ссылка на меню "выход"
-
-    sm.on_click = lambda _: file_picker.pick_files(file_type=file_type,  dialog_title='File', allowed_extensions=['txt'],  allow_multiple=False)#handle_color_click1
-    ex.event_handlers['click'] = lambda _:  page.open(confirm_dialog)
-
-ft.app(main)
+if __name__ == "__main__":
+    ft.app(target=main)
