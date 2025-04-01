@@ -1,6 +1,8 @@
+''''qw rty'''
 import flet as ft
 
 def getcontrol():
+    ''''qwe rty'''
     m = ft.NavigationBar(
         destinations=[
             ft.NavigationBarDestination(icon=ft.Icons.EXPLORE, label="Explore"),

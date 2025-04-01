@@ -11,7 +11,7 @@ red_container = ft.Container(
             ]
         )
     )
-    
+
 green_container = blue_container = ft.Container(
         bgcolor=ft.colors.GREEN,
         padding=100,
@@ -24,16 +24,13 @@ green_container = blue_container = ft.Container(
             ]
         )
     )
-    
+
 blue_container = ft.Container(
         bgcolor=ft.colors.BLUE,
         expand=True,
             content=ft.Row(
             [
- 
                 ft.ElevatedButton(text="Кнопка 2", width=150),
-
             ]
         )
     )
-    
