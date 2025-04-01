@@ -38,7 +38,7 @@ def main(page: ft.Page):
         print(type(e))
         page.close(confirm_dialog)
 
-    confirm_dialog = ft.AlertDialog(
+    confirm_dialog:AlertDialog = ft.AlertDialog(
         modal=True,
         title=ft.Text("Подтверждение"),
         content=ft.Text("Вы действительно хотите выйти?"),

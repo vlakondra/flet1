@@ -1,3 +1,13 @@
+pip install flet --upgrade
+
+pip freeze > requirements.txt !!!!!!
+git push origin main
+venv\Scripts\activate
+pip install -r requirements.txt  !!!!!
+pip list
+
+pyright (MS)
+
 # Flet1 app
 
 ## Run the app
