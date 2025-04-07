@@ -6,6 +6,8 @@ venv\Scripts\activate
 pip install -r requirements.txt  !!!!!
 pip list
 
+git log
+
 pyright (MS)
 
 # Flet1 app
