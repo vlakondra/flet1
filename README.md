@@ -1,9 +1,18 @@
-pip install flet --upgrade
+git config --global http.proxy http://ID101:11625@223.254.253.4:80
+git config --global https.proxy http://ID101:11625@223.254.253.4:80
 
-pip freeze > requirements.txt !!!!!!
-git push origin main
+git clone https://github.com/vlakondra/flet1.git
+pip list
+
+cd flet1
+py -m vevn .venv
 venv\Scripts\activate
-pip install -r requirements.txt  !!!!!
+
+py -m pip install  --proxy http://username:password@223.254.254.4:80 --upgrade pip          !!!
+
+py -m pip install  --proxy http://username:password@223.254.254.4:80 -r requirements.txt    !!!
+
+py -m pip install  --proxy http://username:password@223.254.254.4:80 --upgrade flet         !!!
 pip list
 
 git log
