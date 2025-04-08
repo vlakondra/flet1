@@ -1,7 +1,6 @@
 '''flet'''
 import flet as ft
-
-import flet as ft
+from components.mybutton import MyButton
 
 def navMenu():
     def show_exit_dialog(e):
@@ -12,6 +11,7 @@ def navMenu():
             actions=[
                 ft.TextButton("Да", on_click=lambda e: e.page.window.close()),
                 ft.TextButton("Нет", on_click=lambda e: e.page.close(exit_dialog)),
+                MyButton("Кнопка",show_exit_dialog)
             ],
         )
         e.page.open(exit_dialog)

@@ -9,5 +9,5 @@ class MyButton(ft.ElevatedButton):
         self.bgcolor = Colors.BLUE_300
         self.color = ft.Colors.GREEN_800
         self.text = text
-        self.on_click = onclick #функция на главной странице
+        self.on_click = onclick 
         
